@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import { auth } from "../../firebase/firebase.util";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import "./style.scss";
@@ -20,9 +21,15 @@ const Header = ({ currentUser }) => (
           SIGN OUT
         </div>
       ) : (
-        <Link  to="/signin" className="option">SIGN IN</Link>
+        <Link to="/signin" className="option">
+          SIGN IN
+        </Link>
       )}
     </div>
   </div>
 );
-export default Header;
+// here "state " is rootreducer
+const mapStateToProps = state => ({
+  currentUser: state.user.currentUser
+});
+export default connect(mapStateToProps)(Header);
